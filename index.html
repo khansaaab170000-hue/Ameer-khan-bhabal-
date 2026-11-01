@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameer Khan Bhabal Game</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:sans-serif;display:flex;justify-content:center;height:100vh;overflow:hidden}
+.box{width:100%;max-width:400px;background:#0a0a0a;display:flex;flex-direction:column;position:relative}
+.top{display:flex;justify-content:space-between;padding:12px;background:#111;border-bottom:2px solid #00ff88}
+#canvas{flex:1;width:100%;background:#000}
+.start{position:absolute;inset:0;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;z-index:10}
+h1{color:#00ff88;font-size:30px;text-shadow:0 0 20px #00ff88}
+.btn{background:#00ff88;color:#000;border:none;padding:15px 35px;border-radius:30px;font-weight:900;font-size:18px;margin-top:15px}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="top"><b>👑 Ameer</b><b>Bhabal Game</b><b id="sc">0</b></div>
+<canvas id="canvas"></canvas>
+<div class="start" id="start">
+<h1>AMEER KHAN<br>BHABAL GAME</h1>
+<p style="margin:12px;color:#888">Tap Karke Hack Karo!<br>Green Coin Lo = +10<br>Red Se Bacho!</p>
+<button class="btn" onclick="play()">PLAY NOW 🚀</button>
+</div>
+</div>
+<script>
+let canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d'), W,H;
+function resize(){W=canvas.width=canvas.offsetWidth*2; H=canvas.height=canvas.offsetHeight*2} resize();
+let p={x:80,y:200,v:0}, pipes=[], coins=[], score=0, run=false, f=0, speed=4;
+function tap(){if(!run)return; p.v=-12} canvas.addEventListener('touchstart',tap); canvas.addEventListener('mousedown',tap);
+function play(){document.getElementById('start').style.display='none'; run=true; score=0; pipes=[]; coins=[]; p.y=200; p.v=0; loop();}
+function loop(){
+if(!run)return; f++; ctx.clearRect(0,0,W,H);
+p.v+=0.7; p.y+=p.v; if(p.y>H-80)p.y=H-80; if(p.y<0)p.y=0;
+ctx.fillStyle='#00ff88'; ctx.shadowColor='#00ff88'; ctx.shadowBlur=20; ctx.fillRect(p.x-20,p.y-20,40,40); ctx.fillStyle='#000'; ctx.font='20px sans-serif'; ctx.fillText('💻',p.x-12,p.y+6);
+if(f%90==0){let h=Math.random()*(H-400)+100; pipes.push({x:W,y:0,h:h}); pipes.push({x:W,y:h+180,h:H}); if(Math.random()>0.5)coins.push({x:W+40,y:h+90});}
+pipes.forEach((pl,i)=>{pl.x-=speed; ctx.fillStyle='#ff0044'; ctx.shadowColor='#ff0044'; ctx.shadowBlur=15; ctx.fillRect(pl.x,pl.y,60,pl.h); if(p.x+20>pl.x&&p.x-20<pl.x+60&&p.y+20>pl.y&&p.y-20<pl.y+pl.h){end()} if(pl.x<-100)pipes.splice(i,1)});
+coins.forEach((c,i)=>{c.x-=speed; ctx.beginPath(); ctx.arc(c.x,c.y,16,0,7); ctx.fillStyle='#00ff88'; ctx.shadowColor='#00ff88'; ctx.fill(); ctx.fillStyle='#000'; ctx.fillText('₿',c.x-5,c.y+4); let dx=p.x-c.x,dy=p.y-c.y; if(Math.sqrt(dx*dx+dy*dy)<30){coins.splice(i,1); score+=10; document.getElementById('sc').innerText=score} if(c.x<-50)coins.splice(i,1)});
+requestAnimationFrame(loop);
+}
+function end(){run=false; let s=document.getElementById('start'); s.style.display='flex'; s.innerHTML=`<h1>GAME OVER</h1><p style="font-size:24px;color:#00ff88">Score ${score}</p><button class="btn" onclick="play()">AGAIN 💥</button>`}
+</script>
+</body>
+</html>
