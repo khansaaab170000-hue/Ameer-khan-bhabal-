@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameer Khan Earning Hub</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0e13;color:#fff}
+.top{background:linear-gradient(90deg,#00ff88,#00ccff);padding:18px;text-align:center;color:#000;font-weight:900;font-size:22px}
+.box{max-width:420px;margin:auto;padding:12px}
+.card{background:#151a21;border:1px solid #00ff8844;border-radius:16px;padding:16px;margin:10px 0}
+.bal{font-size:42px;color:#00ff88;text-align:center;font-weight:900}
+.btn{background:linear-gradient(90deg,#00ff88,#00ccff);color:#000;border:none;padding:12px;border-radius:30px;font-weight:900;width:100%;margin-top:8px}
+.task{display:flex;justify-content:space-between;background:#1e252f;padding:12px;border-radius:12px;margin:7px 0}
+input{width:100%;padding:11px;border-radius:10px;border:1px solid #333;background:#0f141c;color:#fff;margin:5px 0}
+</style>
+</head>
+<body>
+<div class="top">💰 AMEER KHAN EARNING HUB 👑<br><small style="font-size:11px">100% Real - Karachi Pakistan</small></div>
+<div class="box">
+<div class="card">
+<div style="text-align:center;color:#888">Available Balance</div>
+<div class="bal">Rs. <span id="bl">250</span></div>
+<div style="text-align:center;color:#00ff88;font-size:12px">BONUS ADDED + Total Earned Rs.1200</div>
+<button class="btn" onclick="wd()">WITHDRAW TO JAZZCASH</button>
+</div>
+<div class="card">
+<b>🔥 Daily Tasks - Roz Earning</b>
+<div class="task"><div>✅ Check-in - Rs.10</div><button class="btn" style="width:auto;padding:7px 16px" onclick="add(10)">Claim</button></div>
+<div class="task"><div>📺 Watch Ad - Rs.15</div><button class="btn" style="width:auto;padding:7px 16px" onclick="add(15)">Start</button></div>
+<div class="task"><div>🎯 Refer Friend - Rs.200</div><button class="btn" style="width:auto;padding:7px 16px" onclick="add(200)">Invite</button></div>
+<div class="task"><div>🎮 Play Game - Rs.100</div><button class="btn" style="width:auto;padding:7px 16px" onclick="add(100)">Play</button></div>
+</div>
+<div class="card">
+<b>💸 Withdraw - Ameer Khan Bhai</b>
+<input id="n" placeholder="Your Name - Ameer Khan">
+<input id="m" placeholder="JazzCash Number - 03XX">
+<input id="a" placeholder="Amount - Min Rs.500">
+<button class="btn" onclick="wd()">REQUEST WITHDRAW</button>
+<p style="font-size:10px;color:#888;text-align:center;margin-top:6px">24 Hours me payment - Ameer Khan</p>
+</div>
+</div>
+<script>
+let b=250;
+function add(x){b+=x;document.getElementById('bl').innerText=b;alert('Mubarak Ameer Bhai! Rs.'+x+' Added!\nNew Balance: Rs.'+b)}
+function wd(){alert('Withdraw Request Sent!\nAmeer Khan Bhai 24hr me JazzCash pe bhejenge! 💰')}
+</script>
+</body>
+</html>
