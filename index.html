@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="monetag" content="dfbeedbc211e04e62d123df9d3c19a8e">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameer Khan Bhabal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{width:100%;max-width:400px;height:92vh;background:#111;border:2px solid #00ff88;border-radius:15px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.top{display:flex;justify-content:space-between;padding:12px;background:#222;color:#00ff88;font-weight:bold}
+#canvas{flex:1;width:100%;background:#000}
+.start{position:absolute;inset:0;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10}
+h1{color:#00ff88;font-size:30px;margin-bottom:20px;text-shadow:0 0 10px #00ff88}
+.btn{background:#00ff88;color:#000;border:0;padding:14px 30px;font-size:20px;font-weight:bold;border-radius:10px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="top"><b>👑 Ameer</b><span id="score">Score: 0</span><b>Bhabal</b></div>
+<canvas id="canvas"></canvas>
+<div class="start" id="startScreen"><h1>Ameer Bhabal</h1><button class="btn" onclick="startGame()">PLAY GAME</button></div>
+</div>
+<script>
+let c=document.getElementById('canvas'),x=c.getContext('2d'),score=0,run=false,p={x:50,y:100,w:28,h:28,vy:0},o=[];
+function resize(){c.width=c.parentElement.clientWidth;c.height=c.parentElement.clientHeight-44}resize();onresize=resize;
+function startGame(){document.getElementById('startScreen').style.display='none';score=0;o=[];p.y=c.height/2;p.vy=0;run=true;loop()}
+c.onclick=()=>{if(run)p.vy=-8}
+function loop(){if(!run)return;x.clearRect(0,0,c.width,c.height);p.vy+=0.5;p.y+=p.vy;if(p.y<0||p.y+p.h>c.height)return end();
+x.fillStyle='#00ff88';x.shadowColor='#00ff88';x.shadowBlur=12;x.fillRect(p.x,p.y,p.w,p.h);x.shadowBlur=0;
+if(Math.random()<0.03)o.push({x:c.width,y:Math.random()*(c.height-80),w:26,h:80});x.fillStyle='#ff0040';
+for(let i=o.length-1;i>=0;i--){let ob=o[i];ob.x-=5;x.fillRect(ob.x,ob.y,ob.w,ob.h);
+if(p.x<ob.x+ob.w&&p.x+p.w>ob.x&&p.y<ob.y+ob.h&&p.y+p.h>ob.y)return end();
+if(ob.x+ob.w<0){o.splice(i,1);score++;document.getElementById('score').innerText='Score: '+score}}}
+requestAnimationFrame(loop)}
+function end(){run=false;let s=document.getElementById('startScreen');s.style.display='flex';s.innerHTML='<h1>Game Over</h1><h1 style="font-size:20px">Score: '+score+'</h1><br><button class="btn" onclick="startGame()">PLAY AGAIN</button>'}
+</script>
+</body>
+</html>
