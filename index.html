@@ -1,46 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ameer Khan Bhabal Game</title><meta name="monetag" content="dfbeedbc211e04e62d123df9d3c19a8e">
+<!-- Monetag Verification Tag -->
+<meta name="monetag" content="dfbeedbc211e04e62d123df9d3c19a8e">
+<title>Ameer Khan Bhabal Game</title>
+
+<!-- Monetag Multitag Ads - Isse Earning Hogi -->
+<script src="https://alwingulla.com/88/tag.min.js" data-zone="YOUR_ZONE_ID" async data-cfasync="false"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:sans-serif;display:flex;justify-content:center;height:100vh;overflow:hidden}
-.box{width:100%;max-width:400px;background:#0a0a0a;display:flex;flex-direction:column;position:relative}
-.top{display:flex;justify-content:space-between;padding:12px;background:#111;border-bottom:2px solid #00ff88}
-#canvas{flex:1;width:100%;background:#000}
-.start{position:absolute;inset:0;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;z-index:10}
-h1{color:#00ff88;font-size:30px;text-shadow:0 0 20px #00ff88}
-.btn{background:#00ff88;color:#000;border:none;padding:15px 35px;border-radius:30px;font-weight:900;font-size:18px;margin-top:15px}
+body{background:#000;color:#fff;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{width:100%;max-width:400px;height:90vh;background:#111;border-radius:15px;border:2px solid #00ff88;display:flex;flex-direction:column;overflow:hidden;position:relative;box-shadow:0 0 20px #00ff88}
+.top{display:flex;justify-content:space-between;padding:12px 15px;background:#1a1a1a;border-bottom:2px solid #00ff88;color:#00ff88;font-weight:bold}
+#canvas{flex:1;width:100%;background:radial-gradient(#111,#000);display:block}
+.start{position:absolute;inset:0;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10;text-align:center}
+.start h1{color:#00ff88;font-size:32px;margin-bottom:10px;text-shadow:0 0 15px #00ff88}
+.start p{color:#aaa;margin-bottom:25px}
+.btn{background:#00ff88;color:#000;border:none;padding:15px 35px;font-size:22px;font-weight:bold;border-radius:10px;cursor:pointer;box-shadow:0 0 15px #00ff88}
+.btn:active{transform:scale(0.95)}
+.score{font-size:18px}
 </style>
 </head>
 <body>
 <div class="box">
-<div class="top"><b>👑 Ameer</b><b>Bhabal Game</b><b id="sc">0</b></div>
-<canvas id="canvas"></canvas>
-<div class="start" id="start">
-<h1>AMEER KHAN<br>BHABAL GAME</h1>
-<p style="margin:12px;color:#888">Tap Karke Hack Karo!<br>Green Coin Lo = +10<br>Red Se Bacho!</p>
-<button class="btn" onclick="play()">PLAY NOW 🚀</button>
+  <div class="top"><span>👑 Ameer</span><span id="scoreDisplay">Score: 0</span><span>Bhabal</span></div>
+  <canvas id="canvas"></canvas>
+  <div class="start" id="startScreen">
+    <h1>Ameer Bhabal</h1>
+    <p>Tap to Play & Earn</p>
+    <button class="btn" onclick="startGame()">PLAY GAME</button>
+  </div>
 </div>
-</div>
+
 <script>
-let canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d'), W,H;
-function resize(){W=canvas.width=canvas.offsetWidth*2; H=canvas.height=canvas.offsetHeight*2} resize();
-let p={x:80,y:200,v:0}, pipes=[], coins=[], score=0, run=false, f=0, speed=4;
-function tap(){if(!run)return; p.v=-12} canvas.addEventListener('touchstart',tap); canvas.addEventListener('mousedown',tap);
-function play(){document.getElementById('start').style.display='none'; run=true; score=0; pipes=[]; coins=[]; p.y=200; p.v=0; loop();}
-function loop(){
-if(!run)return; f++; ctx.clearRect(0,0,W,H);
-p.v+=0.7; p.y+=p.v; if(p.y>H-80)p.y=H-80; if(p.y<0)p.y=0;
-ctx.fillStyle='#00ff88'; ctx.shadowColor='#00ff88'; ctx.shadowBlur=20; ctx.fillRect(p.x-20,p.y-20,40,40); ctx.fillStyle='#000'; ctx.font='20px sans-serif'; ctx.fillText('💻',p.x-12,p.y+6);
-if(f%90==0){let h=Math.random()*(H-400)+100; pipes.push({x:W,y:0,h:h}); pipes.push({x:W,y:h+180,h:H}); if(Math.random()>0.5)coins.push({x:W+40,y:h+90});}
-pipes.forEach((pl,i)=>{pl.x-=speed; ctx.fillStyle='#ff0044'; ctx.shadowColor='#ff0044'; ctx.shadowBlur=15; ctx.fillRect(pl.x,pl.y,60,pl.h); if(p.x+20>pl.x&&p.x-20<pl.x+60&&p.y+20>pl.y&&p.y-20<pl.y+pl.h){end()} if(pl.x<-100)pipes.splice(i,1)});
-coins.forEach((c,i)=>{c.x-=speed; ctx.beginPath(); ctx.arc(c.x,c.y,16,0,7); ctx.fillStyle='#00ff88'; ctx.shadowColor='#00ff88'; ctx.fill(); ctx.fillStyle='#000'; ctx.fillText('₿',c.x-5,c.y+4); let dx=p.x-c.x,dy=p.y-c.y; if(Math.sqrt(dx*dx+dy*dy)<30){coins.splice(i,1); score+=10; document.getElementById('sc').innerText=score} if(c.x<-50)coins.splice(i,1)});
-requestAnimationFrame(loop);
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let score=0, gameRunning=false, player={x:50,y:100,w:30,h:30,vy:0};
+let obstacles=[];
+
+function resize(){canvas.width=canvas.parentElement.clientWidth;canvas.height=canvas.parentElement.clientHeight-44;}
+resize(); window.addEventListener('resize',resize);
+
+function startGame(){
+  document.getElementById('startScreen').style.display='none';
+  score=0; obstacles=[]; player.y=canvas.height/2; player.vy=0; gameRunning=true;
+  loop();
 }
-function end(){run=false; let s=document.getElementById('start'); s.style.display='flex'; s.innerHTML=`<h1>GAME OVER</h1><p style="font-size:24px;color:#00ff88">Score ${score}</p><button class="btn" onclick="play()">AGAIN 💥</button>`}
+canvas.addEventListener('click',()=>{ if(gameRunning) player.vy=-8; });
+document.addEventListener('keydown',(e)=>{ if(e.code==='Space' && gameRunning) player.vy=-8; });
+
+function loop(){
+  if(!gameRunning) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  player.vy+=0.5; player.y+=player.vy;
+  if(player.y+player.h>canvas.height || player.y<0){ gameOver(); return; }
+  ctx.fillStyle='#00ff88'; ctx.shadowColor='#00ff88'; ctx.shadowBlur=10;
+  ctx.fillRect(player.x,player.y,player.w,player.h); ctx.shadowBlur=0;
+
+  if(Math.random()<0.02){ obstacles.push({x:canvas.width,y:Math.random()*(canvas.height-100),w:30,h:100}); }
+  ctx.fillStyle='#ff0040';
+  for(let i=obstacles.length-1;i>=0;i--){
+    let ob=obstacles[i]; ob.x-=4;
+    ctx.fillRect(ob.x,ob.y,ob.w,ob.h);
+    if(player.x<ob.x+ob.w && player.x+player.w>ob.x && player.y<ob.y+ob.h && player.y+player.h>ob.y){ gameOver(); return; }
+    if(ob.x+ob.w<0){ obstacles.splice(i,1); score++; document.getElementById('scoreDisplay').innerText='Score: '+score; }
+  }
+  requestAnimationFrame(loop);
+}
+function gameOver(){
+  gameRunning=false;
+  document.getElementById('startScreen').style.display='flex';
+  document.getElementById('startScreen').innerHTML=`<h1>Game Over</h1><p>Score: ${score}</p><button class="btn" onclick="startGame()">PLAY AGAIN</button>`;
+}
 </script>
 </body>
 </html>
