@@ -10,7 +10,7 @@ h1{color:#1a7f37}
 .join{background:#25D366;color:white;padding:18px;font-size:22px;font-weight:bold;border:none;border-radius:12px;width:100%}
 input{width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc}
 .task{background:#fff;border:2px solid #eee;padding:15px;border-radius:12px;margin:10px 0;text-align:left}
-.task button{background:#1a7f37;color:white;padding:10px 15px;border:none;border-radius:8px;float:right}
+.task button{background:#1a7f37;color:white;padding:10px 15px;border:none;border-radius:8px;width:100%;margin-top:8px}
 .wallet{background:#111;color:#fff;font-size:22px;padding:15px;border-radius:12px}
 </style>
 </head>
@@ -21,7 +21,7 @@ input{width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc}
 
 <div class="wallet">Mere Points: <span id="points">0</span> ⭐</div>
 
-<div class="box" id="joinBox">
+<div class="box">
 <h2>JOIN NOW</h2>
 <input id="name" placeholder="Apna Naam Likho">
 <input id="num" placeholder="WhatsApp Number">
@@ -32,7 +32,6 @@ input{width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc}
 <div class="box">
 <h2>TASK CHOOSE KARO</h2>
 <p>Tum bhi choose karo, members bhi choose karen</p>
-
 <div class="task">1. WhatsApp Group Join Karo <b>+10 Points</b><button onclick="addPoint(10)">Complete</button></div>
 <div class="task">2. YouTube Channel Subscribe Karo <b>+10 Points</b><button onclick="addPoint(10)">Complete</button></div>
 <div class="task">3. 1 Dost Ko Invite Karo <b>+20 Points</b><button onclick="addPoint(20)">Complete</button></div>
@@ -42,8 +41,8 @@ input{width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc}
 <div class="box">
 <h2>REWARD</h2>
 <p>1000 Points = Mobile Recharge / Gift</p>
-<p>Paise tumhe nahi dene, Points se Reward milega!</p>
-<a href="https://wa.me/923000000000" style="display:block;background:#25D366;color:white;padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;">WITHDRAW KE LIYE WHATSAPP KARO</a>
+<a href="https://wa.me/923323234516?text=Assalam%20o%20Alaikum%20Bhai%20Mere%201000%20Points%20Ho%20Gaye%20Hain%20Mujhe%20Reward%20Chahiye" style="display:block;background:#25D366;color:white;padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;">WITHDRAW KE LIYE WHATSAPP KARO</a>
+<p style="font-size:13px;color:#666;">Admin WhatsApp: 03323234516</p>
 </div>
 
 <script>
@@ -51,7 +50,9 @@ let p = localStorage.getItem("points") || 0;
 document.getElementById("points").innerText = p;
 function joinNow(){
   let n = document.getElementById("name").value;
+  let m = document.getElementById("num").value;
   document.getElementById("welcome").innerText = "Mubarak ho " + n + "! Tum Join Ho Gaye ✅ Ab Neeche Se Task Choose Karo";
+  window.open("https://wa.me/923323234516?text=Assalam%20o%20Alaikum%20Mera%20Naam%20" + n + "%20Hai%20Maine%20Join%20Kar%20Liya%20Hai%20Number:%20" + m);
 }
 function addPoint(x){
   p = parseInt(p) + x;
@@ -61,4 +62,4 @@ function addPoint(x){
 }
 </script>
 </body>
-  </html>
+</html>
