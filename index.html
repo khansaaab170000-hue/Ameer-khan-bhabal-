@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="monetag" content="dfbeedbc211e04e62d123df9d3c19a8e">
-<title>Ameer Khan Earning Hub</title>
-<script src="https://5gvci.com/act/files/tag.min.js?z=10300285" data-cfasync="false" async></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earn Points - Join Now</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;margin:0;padding:15px;text-align:center}
+.box{background:white;padding:20px;border-radius:15px;margin-bottom:15px}
+h1{color:#1a7f37}
+.join{background:#25D366;color:white;padding:18px;font-size:22px;font-weight:bold;border:none;border-radius:12px;width:100%}
+input{width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc}
+.task{background:#fff;border:2px solid #eee;padding:15px;border-radius:12px;margin:10px 0;text-align:left}
+.task button{background:#1a7f37;color:white;padding:10px 15px;border:none;border-radius:8px;float:right}
+.wallet{background:#111;color:#fff;font-size:22px;padding:15px;border-radius:12px}
+</style>
 </head>
-<body style="background:#0a0e13;color:#fff;text-align:center;padding:50px;font-family:Arial">
-<h1 style="color:#00ff88">💰 AMEER KHAN EARNING HUB</h1>
-<p>Your site is verified!</p>
+<body>
+
+<h1>💰 EARN POINTS 💰</h1>
+<p>Task Choose Karo, Point Kamao!</p>
+
+<div class="wallet">Mere Points: <span id="points">0</span> ⭐</div>
+
+<div class="box" id="joinBox">
+<h2>JOIN NOW</h2>
+<input id="name" placeholder="Apna Naam Likho">
+<input id="num" placeholder="WhatsApp Number">
+<button class="join" onclick="joinNow()">JOIN NOW 👆</button>
+<p id="welcome"></p>
+</div>
+
+<div class="box">
+<h2>TASK CHOOSE KARO</h2>
+<p>Tum bhi choose karo, members bhi choose karen</p>
+
+<div class="task">1. WhatsApp Group Join Karo <b>+10 Points</b><button onclick="addPoint(10)">Complete</button></div>
+<div class="task">2. YouTube Channel Subscribe Karo <b>+10 Points</b><button onclick="addPoint(10)">Complete</button></div>
+<div class="task">3. 1 Dost Ko Invite Karo <b>+20 Points</b><button onclick="addPoint(20)">Complete</button></div>
+<div class="task">4. Website Ko 5 Dost Ko Share Karo <b>+20 Points</b><button onclick="addPoint(20)">Complete</button></div>
+</div>
+
+<div class="box">
+<h2>REWARD</h2>
+<p>1000 Points = Mobile Recharge / Gift</p>
+<p>Paise tumhe nahi dene, Points se Reward milega!</p>
+<a href="https://wa.me/923000000000" style="display:block;background:#25D366;color:white;padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;">WITHDRAW KE LIYE WHATSAPP KARO</a>
+</div>
+
+<script>
+let p = localStorage.getItem("points") || 0;
+document.getElementById("points").innerText = p;
+function joinNow(){
+  let n = document.getElementById("name").value;
+  document.getElementById("welcome").innerText = "Mubarak ho " + n + "! Tum Join Ho Gaye ✅ Ab Neeche Se Task Choose Karo";
+}
+function addPoint(x){
+  p = parseInt(p) + x;
+  localStorage.setItem("points", p);
+  document.getElementById("points").innerText = p;
+  alert("Mubarak! +" + x + " Points Mil Gaye!");
+}
+</script>
 </body>
   </html>
